@@ -1,11 +1,96 @@
-# History files
-.Rhistory
+#(1)
+v<-c(1:3,NA,NA,NA,11)
+funNA<- function(v){
+  w=which(is.na(v))
+  z=length(w)
+  return(z)
+}
+funNA(v)
+#(2)
+DF <- data.frame(1:3,c(NA,NA,NA),4:6)
+funDFNA<- function(DF){
+  names(DF)[1]<-"age"
+  names(DF)[2]<-"weight"
+  names(DF)[3]<-"height"
+a =length(which(is.na(DF$age)))
+b=length(which(is.na(DF$weight)))
+c=length(which(is.na(DF$height)))
+i=data.frame(a,b,c)
+names(i)[1]="AGE"
+names(i)[2]="WEIGHT"
+names(i)[3]="HEIGHT"
+return(i)
+}
 
-# Example code in package build process
-*-Ex.R
+funDFNA(DF)
 
-# R data files from past sessions
-.Rdata
+v<- 1:10
+#(3)
+l<-c(2,5,1,7,9,8,0)
+fun3<- function(l){
+  
+l<- sort(l)
+l
+mal<-l[length(l)]
+mil<-l[1]
+meal<-sum(l)/length(l)
+if (length(l)%%2==0){
+  medl<-l[length(l)/2]+l[(length(l)/2)+1]/2
+}
+if(length(l)%%2!=0){
+  medl<-l[(length(l)+1)/2]
+  }
+z<-c(mal,mil,meal,medl)
+names(z)<-c("MAX","MIN","MEAN","MEDIAN")
 
-# RStudio files
-.Rproj.user/
+return(z)
+}
+fun3(l)
+#(4)
+
+v<- c("set","set","op","tu")
+fun4<- function(v){
+  
+u<- unique(v)
+u
+length(u)
+w<-table(v)
+w
+max(w)
+t=w[max(w)]
+t
+
+#(5)
+L<- c(TRUE,FALSE,FALSE,TRUE,TRUE,NA,NA,TRUE)
+
+fun5<- function(L){
+  
+N<-table(L)
+N
+NT<-N[names(N)==TRUE]
+NT
+NF<-N[names(N)==FALSE]
+NF
+N.A<-length(L)-(NF+NT)
+PT<-NT/(length(L))
+TOTAL<-c(N.A,NT,NF,PT)
+names(TOTAL)<- c("missing","true","false","proportion of true")
+TOTAL
+return(TOTAL)
+}
+fun5(L)
+#(6)
+q<-c(11,12,2,4,5,6,1)
+r<-c("june","july","june","august","mars","april","september")
+ld<-c(TRUE,NA,NA,FALSE,TRUE,FALSE,TRUE)
+DFtest<-data.frame(q,r,ld)
+DFtest
+fun6<- function(DF){
+  o<-fun3(DF$q)
+  print(o)
+  it<-fun4(DF$r)
+  print(it)
+  fin<-fun5(DF$ld)
+  print(fin)
+}
+fun6(DFtest)
